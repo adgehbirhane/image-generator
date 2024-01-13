@@ -15,7 +15,6 @@ app.listen(PORT, () => {
 
 app.post("/generate-image", async (req, res) => {
   const { prompt } = req.body;
-
   try {
     const response = await generateImage(prompt);
     res.json(response.data);
@@ -38,7 +37,7 @@ async function generateImage(prompt) {
     const data = {
       prompt,
       num_images: 1,
-      size: "256x256",
+      size: "512x512",
       response_format: "url",
     };
 
