@@ -87,19 +87,19 @@ function App() {
             </Box>
           </Box>
         ))}
-      <Box sx={{ display: "flex", justifyContent: "center", mr: 5 }}>
-        <Box sx={{ height: "85vh", overflowY: "auto" }}>
-          {images &&
-            images.length !== 0 &&
-            images.map((image, index) => (
+      {images && images.length !== 0 && (
+        <Box sx={{ display: "flex", justifyContent: "center", mr: 5 }}>
+          <Box sx={{ height: "85vh", overflowY: "auto" }}>
+            {images.map((image, index) => (
               <ImageCard
                 key={index.toString()}
                 url={image.url}
                 description={image.description}
               />
             ))}
+          </Box>
         </Box>
-      </Box>
+      )}
       <Box
         component="form"
         onSubmit={handleSubmit}
