@@ -1,7 +1,13 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  LinearProgress,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import myLogo from "/app-logo.png";
 
-export default function Header() {
+export default function Header(progress: { loading: boolean }) {
   return (
     <AppBar sx={{ position: "fixed", top: 0, backgroundColor: "#242424" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -35,6 +41,9 @@ export default function Header() {
           </a>
         </Typography>
       </Toolbar>
+      {progress.loading && (
+        <LinearProgress sx={{ position: "sticky", top: "6.5vh" }} />
+      )}
     </AppBar>
   );
 }

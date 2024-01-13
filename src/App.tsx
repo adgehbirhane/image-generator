@@ -22,14 +22,14 @@ function App() {
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const boxRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (boxRef.current) {
+  useEffect(()=> {
+    if(boxRef.current){
       const boxElement = boxRef.current;
       boxElement.scrollTop = boxElement.scrollHeight;
     }
-  }, [images]);
+  },[images])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,14 +71,14 @@ function App() {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Header />
-      {loading && <LinearProgress />}
+      <Header loading={loading} />
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           overflow: "scroll",
-          // height: "85vh",
+          height: "85vh",
+          mt: '6.7vh',
           mr: 5,
           mb: 15,
         }}
@@ -136,7 +136,7 @@ function App() {
           height: "8.5vh",
         }}
       >
-        <Box sx={{ ml: 5, mr: 5, width: "100%" }}>
+        <Box sx={{ ml: 2, mr: 5, width: "100%" }}>
           <TextField
             type="textarea"
             sx={{
