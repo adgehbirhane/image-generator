@@ -1,17 +1,14 @@
 import {
   Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   IconButton,
   LinearProgress,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState, ChangeEvent, FormEvent } from "react";
-import Header from "./Header";
-import { Download, SendTwoTone } from "@mui/icons-material";
+import Header from "./components/Header";
+import { SendTwoTone } from "@mui/icons-material";
+import ImageCard from "./components/ImageCard";
 
 interface Image {
   url: string;
@@ -27,17 +24,30 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/generate-image", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
+      const response = await fetch(
+        "https://api.openai.com/v1/images/generations",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+
+            Authorization: `Bearer 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`,
+          },
+          body: JSON.stringify({
+            prompt,
+            num_images: 1,
+            size: "512x512",
+            response_format: "url",
+          }),
+        }
+      );
 
       const data = await response.json();
       const newImage = {
-        url: data[0].url,
+        url: data.data[0].url,
         description: prompt,
       };
+
       setImages((prevImages) => [...prevImages, newImage]);
       setPrompt("");
       setLoading(false);
@@ -47,15 +57,6 @@ function App() {
       console.error(error);
     }
   };
-
-  // const handleDownload = (url: string, description: string) => {
-  //   const link = document.createElement("a");
-  //   link.href = url;
-  //   link.download = description;
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -69,7 +70,7 @@ function App() {
               justifyContent: "center",
             }}
           >
-            <Box sx={{ p: 10, mt: "20%" }}>
+            <Box sx={{ mt: "5%" }}>
               <Typography variant="h4">Adgeh Image Generator</Typography>
               <Typography variant="body2" color="darkGrey">
                 Type what you need to an image
@@ -78,44 +79,24 @@ function App() {
                 Your history will not be saved, please don't forget to download
                 the image.
               </Typography>
+              <ImageCard
+                key="1"
+                url="/generated.png"
+                description="sample generated image for prompt: 'Hello world'"
+              />
             </Box>
           </Box>
         ))}
-      <Box sx={{ display: "flex", justifyContent: "right", mr: 5 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", mr: 5 }}>
         <Box sx={{ height: "85vh", overflowY: "auto" }}>
           {images &&
             images.length !== 0 &&
             images.map((image, index) => (
-              <Card key={index} sx={{ mt: 2 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={image.url}
-                    alt={image.description}
-                  />
-                  <CardContent
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography variant="body2">{image.description}</Typography>
-                    <a
-                      href={image.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      download
-                    >
-                      <IconButton
-                        color="primary"
-                        // onClick={() =>
-                        //   handleDownload(image.url, image.description)
-                        // }
-                      >
-                        <Download />
-                      </IconButton>
-                    </a>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <ImageCard
+                key={index.toString()}
+                url={image.url}
+                description={image.description}
+              />
             ))}
         </Box>
       </Box>
