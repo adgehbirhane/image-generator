@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import "./App.css";
+// import "./App.css";
 
 function App() {
   const [prompt, setPrompt] = useState<string>("");
@@ -26,14 +26,14 @@ function App() {
     <div className="App">
       <h1>Adgeh Image Generator</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+      <textarea
           placeholder="Enter a description"
           value={prompt}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setPrompt(e.target.value)
           }
         />
+        <br/>
         <button type="submit">Generate Image</button>
       </form>
       {imageUrl && <img src={imageUrl} alt="Generated" />}
