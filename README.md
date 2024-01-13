@@ -1,1 +1,1 @@
-# openai-image-generator
+# OpenAI Image Generator
