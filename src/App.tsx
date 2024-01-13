@@ -1,6 +1,7 @@
 import {
   Box,
   IconButton,
+  InputAdornment,
   LinearProgress,
   TextField,
   Typography,
@@ -62,79 +63,85 @@ function App() {
     <Box sx={{ height: "100vh" }}>
       <Header />
       {loading && <LinearProgress />}
-      {!images ||
-        (images.length === 0 && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Box sx={{ mt: "5%" }}>
-              <Typography variant="h4">Adgeh Image Generator</Typography>
-              <Typography variant="body2" color="darkGrey">
-                Type what you need to an image
-              </Typography>
-              <Typography variant="body2" color="darkGrey">
-                Your history will not be saved, please don't forget to download
-                the image.
-              </Typography>
-              <ImageCard
-                key="1"
-                url="/generated.png"
-                description="sample generated image for prompt: 'Hello world'"
-              />
-            </Box>
-          </Box>
-        ))}
-      {images && images.length !== 0 && (
-        <Box sx={{ display: "flex", justifyContent: "center", mr: 5 }}>
-          <Box sx={{ height: "85vh", overflowY: "auto" }}>
-            {images.map((image, index) => (
+      <Box sx={{ display: "flex", justifyContent: "center", mr: 5, mb: 15 }}>
+        <Box sx={{ height: "85vh", overflow: "scroll" }}>
+          {!images ||
+            (images.length === 0 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Box sx={{ mt: "5%" }}>
+                  <Typography variant="h4">Adgeh Image Generator</Typography>
+                  <Typography variant="body2" color="darkGrey">
+                    Type what you need to an image
+                  </Typography>
+                  <Typography variant="body2" color="darkGrey">
+                    Your history will not be saved, please don't forget to
+                    download the image.
+                  </Typography>
+                  <ImageCard
+                    key="1"
+                    url="/generated.png"
+                    description="sample generated image for prompt: 'Hello world'"
+                  />
+                </Box>
+              </Box>
+            ))}
+          {images &&
+            images.length !== 0 &&
+            images.map((image, index) => (
               <ImageCard
                 key={index.toString()}
                 url={image.url}
                 description={image.description}
               />
             ))}
-          </Box>
         </Box>
-      )}
+      </Box>
+
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{
           display: "flex",
           position: "fixed",
-          top: "89vh",
-          mb: 5,
+          bottom: 0,
           width: "100%",
           backgroundColor: "#242424",
           p: 2,
+          pb: 5,
         }}
       >
-        <Box flex={5} sx={{ ml: 5 }}>
+        <Box sx={{ ml: 5, mr: 5, width: "100%" }}>
           <TextField
             type="textarea"
-            sx={{ width: "100%", backgroundColor: "#555151" }}
+            sx={{ backgroundColor: "#555151", width: "100%" }}
             placeholder="Enter image description"
             value={prompt}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               setPrompt(e.target.value)
             }
             multiline
+            fullWidth
             rows={2}
             maxRows={5}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    type="submit"
+                    color="primary"
+                    sx={{ fontSize: 40 }}
+                  >
+                    <SendTwoTone sx={{ fontSize: 35 }} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
-        </Box>
-        <Box flex={1}>
-          <IconButton
-            type="submit"
-            color="primary"
-            sx={{ ml: 2, fontSize: 40 }}
-          >
-            <SendTwoTone sx={{ fontSize: 35 }} />
-          </IconButton>
         </Box>
       </Box>
     </Box>
