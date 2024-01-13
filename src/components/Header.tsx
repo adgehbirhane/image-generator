@@ -3,7 +3,7 @@ import myLogo from "/app-logo.png";
 
 export default function Header() {
   return (
-    <AppBar sx={{ position: "sticky", top: 0, backgroundColor: "#242424" }}>
+    <AppBar sx={{ position: "sticky", top: 0, backgroundColor: "#242424", height: '6.5vh' }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="h6"

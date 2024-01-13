@@ -61,10 +61,10 @@ function App() {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Header />
+      <Header/>
       {loading && <LinearProgress />}
-      <Box sx={{ display: "flex", justifyContent: "center", mr: 5, mb: 15 }}>
-        <Box sx={{ height: "85vh", overflow: "scroll" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", overflow: "scroll", height: "85vh", mr: 5, mb: 15 }}>
+        <Box>
           {!images ||
             (images.length === 0 && (
               <Box
@@ -113,6 +113,7 @@ function App() {
           backgroundColor: "#242424",
           p: 2,
           pb: 5,
+          height: '8.5vh'
         }}
       >
         <Box sx={{ ml: 5, mr: 5, width: "100%" }}>
