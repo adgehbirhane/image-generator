@@ -16,8 +16,7 @@ function App() {
       });
 
       const data = await response.json();
-      console.log(data);
-      setImageUrl(data.choices[0].data.url);
+      setImageUrl(data[0].url);
     } catch (error) {
       console.error(error);
     }
@@ -25,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>OpenAI Image Generator</h1>
+      <h1>Adgeh Image Generator</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
