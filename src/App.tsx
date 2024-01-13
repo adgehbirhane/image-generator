@@ -2,7 +2,6 @@ import {
   Box,
   IconButton,
   InputAdornment,
-  LinearProgress,
   TextField,
   Tooltip,
   Typography,
@@ -22,14 +21,14 @@ function App() {
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const boxRef = useRef<HTMLDivElement>(null)
+  const boxRef = useRef<HTMLDivElement>(null);
 
-  useEffect(()=> {
-    if(boxRef.current){
+  useEffect(() => {
+    if (boxRef.current) {
       const boxElement = boxRef.current;
       boxElement.scrollTop = boxElement.scrollHeight;
     }
-  },[images])
+  }, [images]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,7 +77,7 @@ function App() {
           justifyContent: "center",
           overflow: "scroll",
           height: "85vh",
-          mt: '6.7vh',
+          mt: "6.7vh",
           mr: 5,
           mb: 15,
         }}

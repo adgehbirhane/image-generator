@@ -8,7 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function ImageCard(image: { key: string, url: string; description: string }) {
+export default function ImageCard(image: {
+  key: string;
+  url: string;
+  description: string;
+}) {
   return (
     <Card key={image.key} sx={{ mt: 2, backgroundColor: "wheat" }}>
       <CardActionArea>
