@@ -48,14 +48,14 @@ function App() {
     }
   };
 
-  const handleDownload = (url: string, description: string) => {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = description;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleDownload = (url: string, description: string) => {
+  //   const link = document.createElement("a");
+  //   link.href = url;
+  //   link.download = description;
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -98,14 +98,21 @@ function App() {
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Typography variant="body2">{image.description}</Typography>
-                    <IconButton
-                      color="primary"
-                      onClick={() =>
-                        handleDownload(image.url, image.description)
-                      }
+                    <a
+                      href={image.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      download
                     >
-                      <Download />
-                    </IconButton>
+                      <IconButton
+                        color="primary"
+                        // onClick={() =>
+                        //   handleDownload(image.url, image.description)
+                        // }
+                      >
+                        <Download />
+                      </IconButton>
+                    </a>
                   </CardContent>
                 </CardActionArea>
               </Card>
