@@ -4,9 +4,10 @@ import {
   InputAdornment,
   LinearProgress,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import { SendTwoTone } from "@mui/icons-material";
 import ImageCard from "./components/ImageCard";
@@ -20,6 +21,15 @@ function App() {
   const [prompt, setPrompt] = useState<string>("");
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (boxRef.current) {
+      const boxElement = boxRef.current;
+      boxElement.scrollTop = boxElement.scrollHeight;
+    }
+  }, [images]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,9 +71,19 @@ function App() {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Header/>
+      <Header />
       {loading && <LinearProgress />}
-      <Box sx={{ display: "flex", justifyContent: "center", overflow: "scroll", height: "85vh", mr: 5, mb: 15 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          overflow: "scroll",
+          // height: "85vh",
+          mr: 5,
+          mb: 15,
+        }}
+        ref={boxRef}
+      >
         <Box>
           {!images ||
             (images.length === 0 && (
@@ -113,13 +133,17 @@ function App() {
           backgroundColor: "#242424",
           p: 2,
           pb: 5,
-          height: '8.5vh'
+          height: "8.5vh",
         }}
       >
         <Box sx={{ ml: 5, mr: 5, width: "100%" }}>
           <TextField
             type="textarea"
-            sx={{ backgroundColor: "#555151", width: "100%" }}
+            sx={{
+              backgroundColor: "#555151",
+              width: "100%",
+              borderRadius: 2,
+            }}
             placeholder="Enter image description"
             value={prompt}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
@@ -127,18 +151,22 @@ function App() {
             }
             multiline
             fullWidth
+            autoFocus
             rows={2}
             maxRows={5}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    type="submit"
-                    color="primary"
-                    sx={{ fontSize: 40 }}
-                  >
-                    <SendTwoTone sx={{ fontSize: 35 }} />
-                  </IconButton>
+                  <Tooltip title="Send">
+                    <IconButton
+                      type="submit"
+                      color="primary"
+                      sx={{ fontSize: 40 }}
+                      disabled={!prompt}
+                    >
+                      <SendTwoTone sx={{ fontSize: 35 }} />
+                    </IconButton>
+                  </Tooltip>
                 </InputAdornment>
               ),
             }}
