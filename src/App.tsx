@@ -84,7 +84,7 @@ function App() {
         }}
         ref={boxRef}
       >
-        <Box>
+        <Box ref={boxRef}>
           {!images ||
             (images.length === 0 && (
               <Box
