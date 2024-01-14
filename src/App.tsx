@@ -1,15 +1,9 @@
-import {
-  Box,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
+import { Box } from "@mui/material";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import Header from "./components/Header";
-import { SendTwoTone } from "@mui/icons-material";
 import ImageCard from "./components/ImageCard";
+import Greeting from "./components/Greeting";
+import CustomInput from "./components/CustomInput";
 
 interface Image {
   url: string;
@@ -41,7 +35,7 @@ function App() {
           headers: {
             "Content-Type": "application/json",
 
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer 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`,
           },
           body: JSON.stringify({
             prompt,
@@ -85,34 +79,7 @@ function App() {
         ref={boxRef}
       >
         <Box ref={boxRef}>
-          {!images ||
-            (images.length === 0 && (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Box sx={{ mt: "5%" }}>
-                  <Typography variant="h4">Adgeh Image Generator</Typography>
-                  <Typography variant="body2" color="darkGrey">
-                    Type what you need to be an image.
-                  </Typography>
-                  <Typography variant="body2" color="darkGrey">
-                    Your history will not be saved, please don't forget to
-                    download the image.
-                  </Typography>
-                  <Typography variant="body2" color="darkGrey">
-                    Your privacy has been secured.
-                  </Typography>
-                  <ImageCard
-                    key="1"
-                    url="/generated.png"
-                    description="sample generated image for prompt: 'Hello world'"
-                  />
-                </Box>
-              </Box>
-            ))}
+          {!images || (images.length === 0 && <Greeting />)}
           {images &&
             images.length !== 0 &&
             images.map((image, index) => (
@@ -124,58 +91,11 @@ function App() {
             ))}
         </Box>
       </Box>
-
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          backgroundColor: "#242424",
-          p: 2,
-          pb: 5,
-          height: "8.5vh",
-        }}
-      >
-        <Box sx={{ ml: 2, mr: 5, width: "100%" }}>
-          <TextField
-            type="textarea"
-            sx={{
-              backgroundColor: "#555151",
-              width: "100%",
-              borderRadius: 2,
-            }}
-            placeholder="Enter image description"
-            value={prompt}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-              setPrompt(e.target.value)
-            }
-            multiline
-            fullWidth
-            autoFocus
-            rows={2}
-            maxRows={5}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Tooltip title="Send">
-                    <IconButton
-                      type="submit"
-                      color="primary"
-                      sx={{ fontSize: 40 }}
-                      disabled={!prompt}
-                    >
-                      <SendTwoTone sx={{ fontSize: 35 }} />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
-      </Box>
+      <CustomInput
+        handleSubmit={handleSubmit}
+        prompt={prompt}
+        setPrompt={setPrompt}
+      />
     </Box>
   );
 }
