@@ -18,7 +18,6 @@ export default function ImageCard(image: {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="500"
           image={image.url}
           alt={image.description}
         />
