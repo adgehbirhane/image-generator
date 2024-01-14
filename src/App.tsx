@@ -78,6 +78,7 @@ function App() {
           overflow: "scroll",
           height: "85vh",
           mt: "6.7vh",
+          ml: 1,
           mr: 5,
           mb: 15,
         }}
@@ -95,11 +96,14 @@ function App() {
                 <Box sx={{ mt: "5%" }}>
                   <Typography variant="h4">Adgeh Image Generator</Typography>
                   <Typography variant="body2" color="darkGrey">
-                    Type what you need to an image
+                    Type what you need to be an image.
                   </Typography>
                   <Typography variant="body2" color="darkGrey">
                     Your history will not be saved, please don't forget to
                     download the image.
+                  </Typography>
+                  <Typography variant="body2" color="darkGrey">
+                    Your privacy has been secured.
                   </Typography>
                   <ImageCard
                     key="1"
