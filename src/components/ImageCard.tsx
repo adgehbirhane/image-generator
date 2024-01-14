@@ -20,6 +20,7 @@ export default function ImageCard(image: {
           component="img"
           image={image.url}
           alt={image.description}
+          height={512}
         />
         <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body2">{image.description}</Typography>
