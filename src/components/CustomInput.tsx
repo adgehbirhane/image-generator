@@ -36,20 +36,19 @@ export default function CustomInput({
     >
       <Box sx={{ ml: 2, mr: 5, width: "100%" }}>
         <TextField
-          type="textarea"
           sx={{
-            backgroundColor: "#555151",
+            backgroundColor: "rgb(60, 65, 70)",
             width: "100%",
             borderRadius: 2,
           }}
-          placeholder="Enter image description"
+          placeholder="Type what you need to be an image..."
           value={prompt}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setPrompt(e.target.value)
           }
           multiline
           fullWidth
-        //   autoFocus
+          autoFocus
           rows={2}
           maxRows={5}
           InputProps={{

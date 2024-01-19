@@ -9,11 +9,24 @@ export default function Greeting() {
         justifyContent: "center",
       }}
     >
-      <Box sx={{ mt: "5%" }}>
-        <Typography variant="h4">Adgeh Image Generator</Typography>
-        <Typography variant="body2" color="darkGrey">
-          Type what you need to be an image.
+      <Box
+        sx={{
+          mt: "5%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 1,
+        }}
+      >
+        <Typography color="darkgrey" variant="h4">
+          Adgeh Image Generator
         </Typography>
+
+        <ImageCard
+          key="1"
+          url="/generated.png"
+          description="Sample generated image for prompt: 'Coder'"
+        />
         <Typography variant="body2" color="darkGrey">
           Your history will not be saved, please don't forget to download the
           image.
@@ -21,11 +34,6 @@ export default function Greeting() {
         <Typography variant="body2" color="darkGrey">
           Your privacy has been secured.
         </Typography>
-        <ImageCard
-          key="1"
-          url="/generated.png"
-          description="sample generated image for prompt: 'Coder'"
-        />
       </Box>
     </Box>
   );

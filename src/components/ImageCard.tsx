@@ -14,7 +14,7 @@ export default function ImageCard(image: {
   description: string;
 }) {
   return (
-    <Card key={image.key} sx={{ mt: 2, backgroundColor: "wheat" }}>
+    <Card key={image.key} sx={{ mt: 2, backgroundColor: "rgb(50, 65, 65)" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -23,7 +23,16 @@ export default function ImageCard(image: {
           height={512}
         />
         <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="body2">{image.description}</Typography>
+          <Typography
+            variant="subtitle1"
+            color="darkgrey"
+            sx={{
+              transition: "font-style 0.3s",
+              cursor: "text",
+            }}
+          >
+            {image.description}
+          </Typography>
           <a href={image.url} target="_blank" rel="noreferrer" download>
             <IconButton color="primary">
               <Download />
