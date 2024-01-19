@@ -35,7 +35,7 @@ function App() {
           headers: {
             "Content-Type": "application/json",
 
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
           },
           body: JSON.stringify({
             prompt,
