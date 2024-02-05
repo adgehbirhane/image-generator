@@ -27,25 +27,23 @@ const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
   );
 
   return (
-    <div>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
+    <Snackbar
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      message={message}
+      action={action}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+    >
+      <Alert
         onClose={handleClose}
-        message={message}
-        action={action}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        severity="error"
+        variant="filled"
+        sx={{ width: "100%" }}
       >
-        <Alert
-          onClose={handleClose}
-          severity="error"
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {message}
-        </Alert>
-      </Snackbar>
-    </div>
+        {message}
+      </Alert>
+    </Snackbar>
   );
 };
 
