@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ImageCard from "./components/ImageCard";
 import Greeting from "./components/Greeting";
 import CustomInput from "./components/CustomInput";
+import CustomSnackbar from "./components/CustomSnackbar";
 
 interface Image {
   url: string;
@@ -14,8 +15,21 @@ function App() {
   const [prompt, setPrompt] = useState<string>("");
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   const boxRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = (
+    _event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (boxRef.current) {
@@ -58,6 +72,8 @@ function App() {
     } catch (error) {
       setLoading(false);
       setPrompt("");
+      setMessage("Sorry! The system temporarily stopped functioning...");
+      setOpen(true);
       console.error(error);
     }
   };
@@ -96,6 +112,7 @@ function App() {
         prompt={prompt}
         setPrompt={setPrompt}
       />
+      <CustomSnackbar open={open} message={message} handleClose={handleClose} />
     </Box>
   );
 }
